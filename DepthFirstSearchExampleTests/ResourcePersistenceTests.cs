@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using DepthFirstSearchExample;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Xunit;
 
 namespace DepthFirstSearchExampleTests

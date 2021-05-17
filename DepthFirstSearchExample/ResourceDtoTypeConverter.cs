@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace DepthFirstSearchExample
 {
-    public class ResourceEntityToDtoMapper
+    public class ResourceDtoTypeConverter : ITypeConverter<ResourceEntity, ResourceDto>
     {
-        public static ResourceDto Map(ResourceEntity entity)
+        public ResourceDto Convert(ResourceEntity source, ResourceDto destination, ResolutionContext context)
         {
-            // Setup the root DTO.
-            var dto = new ResourceDto
+            var rootDto = new ResourceDto
             {
-                Id = entity.Id,
-                Path = entity.Path
+                Id = source.Id,
+                Path = source.Path,
+                Name = source.Name
             };
 
-            MapChildren(dto, entity.InverseParentResource);
+            MapChildren(rootDto, source.InverseParentResource);
 
-            return dto;
+            return rootDto;
         }
 
         private static void MapChildren(ResourceDto parentDto, ICollection<ResourceEntity> childEntities)
@@ -35,7 +36,8 @@ namespace DepthFirstSearchExample
                 {
                     Id = childEntity.Id,
                     Path = childEntity.Path,
-                    Parent = parentDto
+                    Parent = parentDto,
+                    Name = childEntity.Name
                 };
 
                 ((List<ResourceDto>)parentDto.Children).Add(childDto);

@@ -17,5 +17,6 @@ namespace DepthFirstSearchExample
         public ResourceDto Parent { get; set; }
 
         public IEnumerable<ResourceDto> Children { get; set; }
+        public string Name { get; set; }
     }
 }

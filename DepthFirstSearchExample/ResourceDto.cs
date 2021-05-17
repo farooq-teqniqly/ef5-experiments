@@ -5,6 +5,11 @@ namespace DepthFirstSearchExample
 {
     public class ResourceDto
     {
+        public ResourceDto()
+        {
+            Children = new List<ResourceDto>();
+        }
+
         public Guid Id { get; set; }
 
         public string Path { get; set; }
